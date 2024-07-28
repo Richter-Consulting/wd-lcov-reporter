@@ -1,0 +1,29 @@
+name: 'WD lcov reporter'
+description:
+  'Reports the coverage from lcov file to as MR comment or run output'
+author: 'Eugen [WebDucer] Richter'
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+branding:
+  icon: 'percent'
+  color: 'blue'
+
+# Define your inputs here.
+inputs:
+  lcov-file:
+    description: 'Path to the lcov file to parse'
+    required: true
+  excluded-files:
+    description: 'List of files to exclude from coverage, "," (comma) separated'
+    required: false
+
+# Define your outputs here.
+outputs:
+  markdown-table:
+    description: 'Coverage as markdown table'
+  coverage:
+    description: 'Overall coverage percentage'
+
+runs:
+  using: node20
+  main: dist/index.js
