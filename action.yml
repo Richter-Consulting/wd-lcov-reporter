@@ -16,6 +16,10 @@ inputs:
   excluded-files:
     description: 'List of files to exclude from coverage, "," (comma) separated'
     required: false
+  step-summary:
+    description: 'Add the coverage table to the step summary'
+    required: false
+    default: 'true'
 
 # Define your outputs here.
 outputs:

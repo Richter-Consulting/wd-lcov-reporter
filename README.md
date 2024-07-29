@@ -34,10 +34,13 @@ Path to the lcov file to parse (currently only one file supported).
 
 #### `excluded-files`
 
-Comma separated list of files, that should be excluded from code coverade report. Common globes can be used here:
+Comma separated list of files, that should be excluded from code coverade
+report. Common globes can be used here:
 
-- `**`: folder globe (e.g. `**/email.dart` would match `foo/email.dart` but also `foo/bar/foo-bar/email.dart`)
-- `*`: file name globe (e.g. `**/email-*-validation.dart` would match `email-domain-validation.dart` but not `emailvalidation.dart`)
+- `**`: folder globe (e.g. `**/email.dart` would match `foo/email.dart` but also
+  `foo/bar/foo-bar/email.dart`)
+- `*`: file name globe (e.g. `**/email-*-validation.dart` would match
+  `email-domain-validation.dart` but not `emailvalidation.dart`)
 
 ### Overall coverage result
 
@@ -45,10 +48,10 @@ Comma separated list of files, that should be excluded from code coverade report
 
 ### Mardown Table result
 
-| File | Line Coverage | Function Coverage | Branch Coverage |
-| --- | --- | --- | --- |
-| lib/domain/models/email.dart | 100.00% | 0.00% | 0.00% |
-| lib/core/exceptions/exceptions.dart | 40.00% | 0.00% | 0.00% |
+| File                                | Line Coverage | Function Coverage | Branch Coverage |
+| ----------------------------------- | ------------- | ----------------- | --------------- |
+| lib/domain/models/email.dart        | 100.00%       | 0.00%             | 0.00%           |
+| lib/core/exceptions/exceptions.dart | 40.00%        | 0.00%             | 0.00%           |
 
 ## TODO
 

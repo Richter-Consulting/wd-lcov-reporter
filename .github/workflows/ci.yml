@@ -59,6 +59,7 @@ jobs:
         with:
           lcov-file: './__tests__/lcov-test-2.info'
           excluded-files: '**/*.g.dart, **/*.freezed.dart, **/.realm.dart'
+          step-summary: true
 
       - name: Print Output
         id: output
