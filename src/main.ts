@@ -104,7 +104,8 @@ async function _handlePrComment(
     }
   }
 
-  const summary = _generateSummary(overallCoverage, markdownTable)
+  const summary =
+    _generateSummary(overallCoverage, markdownTable) + `\n${commentTag}`
   // If comment, found, replace the existing comment
   if (commentId > 0) {
     await octokit.rest.issues.updateComment({
