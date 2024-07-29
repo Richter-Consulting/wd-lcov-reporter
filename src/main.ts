@@ -50,14 +50,19 @@ export async function run(): Promise<void> {
 
     // Set PR comment, if requested
     if (prCommentInput === 'true') {
-      _handlePrComment(overallCoverage, markdownTable)
+      await _handlePrComment(overallCoverage, markdownTable)
     }
   } catch (error) {
     // Fail the workflow run if an error occurs
     if (error instanceof Error) core.setFailed(error.message)
   }
 }
-function _generateSummary(overallCoverage: string, markdownTable: string) {
+function _generateSummary(
+  overallCoverage: string,
+  markdownTable: string
+): string {
+  core.info('Generating coverage summary...')
+
   return `# Coverage Summary
 
 Overall coverage: **${overallCoverage} %**
@@ -73,13 +78,14 @@ ${markdownTable}
 async function _handlePrComment(
   overallCoverage: string,
   markdownTable: string
-) {
+): Promise<void> {
   const prNumber = github.context.payload.pull_request?.number
   if (!prNumber || prNumber <= 0) {
     core.warning('PR number not found. Skipping PR comment.')
     return
   }
 
+  core.info('Commenting on PR...')
   const commentTag = `<!-- Richter-Constulting/wd-lcov-reporter-action for PR: ${prNumber} -->`
 
   // Search for the comment with the given tag
