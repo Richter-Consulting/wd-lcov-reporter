@@ -6,8 +6,9 @@
 [![CodeQL](https://github.com/Richter-Consulting/wd-lcov-reporter-action/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Richter-Consulting/wd-lcov-reporter-action/actions/workflows/codeql-analysis.yml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
-
-A simple action that parse the core data from LCOV file (line, function and block coverage). The out put variables provide basic data to use in PR comments or run output.
+A simple action that parse the core data from LCOV file (line, function and
+block coverage). The out put variables provide basic data to use in PR comments
+or run output.
 
 ## Example for configuration
 
@@ -21,8 +22,6 @@ A simple action that parse the core data from LCOV file (line, function and bloc
 ```
 
 ### Configuration parameters
-
-
 
 ## TODO
 
