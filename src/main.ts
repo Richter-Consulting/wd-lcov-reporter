@@ -42,7 +42,7 @@ export async function run(): Promise<void> {
     core.setOutput('markdown-table', markdownTable)
 
     // Set step summary, if requested
-    if (stepSummary) {
+    if (stepSummaryInput === 'true') {
       core.summary
         .addHeading('Coverage Summary')
         .addRaw(`Overall coverage: **${overallCoverage}**`)

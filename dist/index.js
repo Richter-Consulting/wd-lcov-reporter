@@ -29074,9 +29074,9 @@ async function run() {
         // Get file name from input
         const lcovFileName = core.getInput('lcov-file');
         const excludeFiles = core.getInput('exclude-files');
+        const stepSummaryInput = core.getInput('step-summary');
         // Check, the file name is set and exists
-        core.debug(`File name: ${lcovFileName}`);
-        core.debug(`Exclusion: ${excludeFiles}`);
+        core.debug(`stepSummaryInput: ${stepSummaryInput}`);
         if (!lcovFileName) {
             core.setFailed('File name is required');
             return;
@@ -29096,6 +29096,14 @@ async function run() {
         // Set outputs for other workflow steps to use
         core.setOutput('coverage', overallCoverage);
         core.setOutput('markdown-table', markdownTable);
+        // Set step summary, if requested
+        if (stepSummaryInput === 'true') {
+            core.summary
+                .addHeading('Coverage Summary')
+                .addRaw(`Overall coverage: **${overallCoverage}**`)
+                .addDetails('Detailed coverage', markdownTable)
+                .write();
+        }
     }
     catch (error) {
         // Fail the workflow run if an error occurs
