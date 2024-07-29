@@ -13,9 +13,10 @@ export async function run(): Promise<void> {
     // Get file name from input
     const lcovFileName = core.getInput('lcov-file')
     const excludeFiles = core.getInput('exclude-files')
-    const stepSummary = core.getInput('step-summary') === 'true'
+    const stepSummaryInput = core.getInput('step-summary')
 
     // Check, the file name is set and exists
+    core.debug(`stepSummaryInput: ${stepSummaryInput}`)
     if (!lcovFileName) {
       core.setFailed('File name is required')
       return
