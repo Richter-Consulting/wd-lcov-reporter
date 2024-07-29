@@ -43,11 +43,17 @@ export async function run(): Promise<void> {
 
     // Set step summary, if requested
     if (stepSummaryInput === 'true') {
-      core.summary
-        .addHeading('Coverage Summary')
-        .addRaw(`Overall coverage: **${overallCoverage}**`)
-        .addDetails('Detailed coverage', markdownTable)
-        .write()
+      const summary = `# Coverage Summary
+
+Overall coverage: <strong>${overallCoverage}</strong>
+
+<details><summary>Detailed coverage</summary>
+
+${markdownTable}
+
+</details>
+`
+      core.summary.addRaw(summary).write()
     }
   } catch (error) {
     // Fail the workflow run if an error occurs
