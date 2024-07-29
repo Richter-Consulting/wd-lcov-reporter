@@ -12,7 +12,10 @@ export async function run(): Promise<void> {
   try {
     // Get file name from input
     const lcovFileName = core.getInput('lcov-file')
+    const excludeFiles = core.getInput('exclude-files')
     // Check, the file name is set and exists
+    core.debug(`File name: ${lcovFileName}`)
+    core.debug(`Exclusion: ${excludeFiles}`)
     if (!lcovFileName) {
       core.setFailed('File name is required')
       return
@@ -22,7 +25,6 @@ export async function run(): Promise<void> {
       return
     }
 
-    const excludeFiles = core.getInput('exclude-files')
     const excludedFilesArray = excludeFiles ? excludeFiles.split(',') : []
 
     const parserConf: LcovParserConfigType = {
