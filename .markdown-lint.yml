@@ -2,5 +2,5 @@
 MD033:
   # Allowed elements
   allowed_elements:
-    - details
-    - summary
+    - <details>
+    - <summary>

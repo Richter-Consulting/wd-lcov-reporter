@@ -67,7 +67,7 @@ Publish the coverage table as PR comment. On new push, the comment is updated
 (optional - default: `false`)
 
 ##### Example
-
+<!-- markdownlint-disable MD025 -->
 ---
 
 # Coverage Summary
@@ -76,15 +76,15 @@ Overall coverage: **22.83 %**
 
 <details><summary>Detailed coverage</summary>
 
-| File                                | Line Coverage | Function Coverage | Branch Coverage |
-| ----------------------------------- | ------------- | ----------------- | --------------- |
-| lib/domain/models/email.dart        | 100.00%       | 0.00%             | 0.00%           |
-| lib/core/exceptions/exceptions.dart | 40.00%        | 0.00%             | 0.00%           |
+| File                | Line Coverage | Function Coverage | Branch Coverage |
+| ------------------- | ------------- | ----------------- | --------------- |
+| lib/email.dar       | 100.00%       | 0.00%             | 0.00%           |
+| lib/exceptions.dart | 40.00%        | 0.00%             | 0.00%           |
 
 </details>
 
 ---
-
+<!-- markdownlint-enable MD001 MD005 -->
 #### `github-token`
 
 GitHub token, required only to comment on PR. This is also required the write
