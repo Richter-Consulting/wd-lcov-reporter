@@ -28,9 +28,11 @@ jobs:
         excluded-files: '**/*.g.dart, **/*.freezed.dart, **/.realm.dart'
         # Optional (default: 'true): Report coverage as step summary
         step-summary: 'true'
-        # Optional (default: 'false): Reoprt coverage on PR (with update of the comment)
+        # Optional (default: 'false): Reoprt coverage on PR
+        # (with update of the comment)
         pr-comment: 'true'
-        # Optional: GitHub token to write the PR comment (also requires premission to do so)
+        # Optional: GitHub token to write the PR comment
+        # (also requires premission to do so)
         github-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Coverage output
@@ -59,7 +61,7 @@ report. Common globes can be used here:
 
 Publish the coverage table to step summary (optional - default: `true`)
 
-### `pr-comment`
+#### `pr-comment`
 
 Publish the coverage table as PR comment. On new push, the comment is updated
 (optional - default: `false`)
