@@ -67,7 +67,9 @@ Publish the coverage table as PR comment. On new push, the comment is updated
 (optional - default: `false`)
 
 ##### Example
-<!-- markdownlint-disable MD025 -->
+
+<!-- markdownlint-disable -->
+
 ---
 
 # Coverage Summary
@@ -84,7 +86,9 @@ Overall coverage: **22.83 %**
 </details>
 
 ---
-<!-- markdownlint-enable MD001 MD005 -->
+
+<!-- markdownlint-enable -->
+
 #### `github-token`
 
 GitHub token, required only to comment on PR. This is also required the write
