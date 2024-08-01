@@ -87,9 +87,9 @@ Overall coverage: **22.83 %**
 
 ---
 
-<!-- markdownlint-enable -->
-
 #### `github-token`
+
+<!-- markdownlint-enable -->
 
 GitHub token, required only to comment on PR. This is also required the write
 permission on PR (see configuration example). If PR comment is disabled, the

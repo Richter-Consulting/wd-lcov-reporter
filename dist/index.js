@@ -33409,7 +33409,7 @@ async function _handlePrComment(overallCoverage, markdownTable) {
     // Search for the comment with the given tag
     const octokit = github.getOctokit(core.getInput('github-token'));
     let commentId = -1;
-    for await (const { data: comments } of octokit.paginate.iterator(octokit.rest.issues.listComments, { ...github.context.repo, issue_number: prNumber })) {
+    for await (const { data: comments } of octokit.paginate.iterator(octokit.rest.issues.listComments, { ...github.context.repo, issue_number: prNumber, per_page: 100 })) {
         const foundComment = comments.find(comment => comment.body?.includes(commentTag));
         if (foundComment) {
             commentId = foundComment.id;
