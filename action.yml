@@ -16,6 +16,17 @@ inputs:
   excluded-files:
     description: 'List of files to exclude from coverage, "," (comma) separated'
     required: false
+  step-summary:
+    description: 'Add the coverage table to the step summary'
+    required: false
+    default: 'true'
+  pr-comment:
+    description: 'Add the coverage table as PR comment'
+    required: false
+    default: 'false'
+  github-token:
+    description: 'GitHub token to use for PR comment'
+    required: false
 
 # Define your outputs here.
 outputs:
