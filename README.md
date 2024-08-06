@@ -20,7 +20,7 @@ jobs:
   coverage:
     - name: LCOV parser
       id: lcov-result
-      uses: Richter-Consulting/wd-lcov-reporter@v1
+      uses: Richter-Consulting/wd-lcov-reporter@v0.2.0
       with:
         # Coverage file path
         lcov-file: './coverage/lcov.info'
@@ -34,6 +34,8 @@ jobs:
         # Optional: GitHub token to write the PR comment
         # (also requires premission to do so)
         github-token: ${{ secrets.GITHUB_TOKEN }}
+        # Template file for PR comment / step summary
+        template-file: ./templates/pr_coverage.md
 
     - name: Coverage output
       run: |
@@ -94,6 +96,26 @@ Overall coverage: **22.83 %**
 GitHub token, required only to comment on PR. This is also required the write
 permission on PR (see configuration example). If PR comment is disabled, the
 token is not needed.
+
+#### `template-string`
+
+String to use as template for PR comment or step summary. The following
+placeholders will be replaced with values calculated in the action:
+
+- `{{overall-coverage}}`: The overal coverage as number (with 2 decimal digits),
+  e.g. `78.76`
+- `{{coverage-table}}`: Markdown table with coverages per file (see
+  [Markdown Table Result](#mardown-table-result))
+
+#### `template-file`
+
+Text file to use as template for the PR comment or step summary. The following
+placeholders will be replaced with values calculated in the action:
+
+- `{{overall-coverage}}`: The overal coverage as number (with 2 decimal digits),
+  e.g. `78.76`
+- `{{coverage-table}}`: Markdown table with coverages per file (see
+  [Markdown Table Result](#mardown-table-result))
 
 ### Overall coverage result
 
