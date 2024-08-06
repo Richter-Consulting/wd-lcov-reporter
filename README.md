@@ -20,7 +20,7 @@ jobs:
   coverage:
     - name: LCOV parser
       id: lcov-result
-      uses: Richter-Consulting/wd-lcov-reporter@v1
+      uses: Richter-Consulting/wd-lcov-reporter@v0.2.0
       with:
         # Coverage file path
         lcov-file: './coverage/lcov.info'
