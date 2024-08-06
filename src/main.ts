@@ -81,7 +81,7 @@ async function _generateSummary(
   if (!template || template.trim() === '') {
     // Template from file
     const templateFile = core.getInput('template-file')
-    if (templateFile || !exists(templateFile)) {
+    if (templateFile && templateFile.trim() !== '' && !exists(templateFile)) {
       core.setFailed(`Template file not found: ${templateFile}`)
       return ''
     }
