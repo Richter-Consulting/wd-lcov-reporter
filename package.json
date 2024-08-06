@@ -1,16 +1,16 @@
 {
-  "name": "wd-lcov-reporter-action",
+  "name": "wd-lcov-reporter",
   "description": "GitHub Actions to report lcov coverage in GitHub CI/CI pipelines",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Eugen [WebDucer] Richter",
   "private": false,
-  "homepage": "https://github.com/Richter-Consulting/wd-lcov-reporter-action",
+  "homepage": "https://github.com/Richter-Consulting/wd-lcov-reporter",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Richter-Consulting/wd-lcov-reporter-action.git"
+    "url": "git+https://github.com/Richter-Consulting/wd-lcov-reporter.git"
   },
   "bugs": {
-    "url": "https://github.com/Richter-Consulting/wd-lcov-reporter-action/issues"
+    "url": "https://github.com/Richter-Consulting/wd-lcov-reporter/issues"
   },
   "keywords": [
     "actions",
