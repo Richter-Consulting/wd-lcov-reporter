@@ -33359,7 +33359,7 @@ async function run() {
         const stepSummaryInput = core.getInput('step-summary');
         const prCommentInput = core.getInput('pr-comment');
         // Check, the file name is set and exists
-        if (!lcovFileName) {
+        if (!lcovFileName || lcovFileName.trim() === '') {
             core.setFailed('File name is required');
             return;
         }
