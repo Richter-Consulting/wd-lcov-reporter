@@ -33328,16 +33328,25 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = run;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
-const fs_1 = __importDefault(__nccwpck_require__(7147));
+const fs_1 = __nccwpck_require__(7147);
 const parse_lcov_1 = __nccwpck_require__(2733);
 const output_lcov_1 = __nccwpck_require__(7864);
+const _OVERALL_COVERAGE_PLACEHOLDER = '{{overall-coverage}}';
+const _COVERAGE_TABLE_PLACEHOLDER = '{{coverage-table}}';
+const _defautTemplate = `# Coverage Summary
+
+Overall coverage: **${_OVERALL_COVERAGE_PLACEHOLDER} %**
+
+<details><summary>Detailed coverage</summary>
+
+${_COVERAGE_TABLE_PLACEHOLDER}
+
+</details>
+`;
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -33354,7 +33363,7 @@ async function run() {
             core.setFailed('File name is required');
             return;
         }
-        if (!fs_1.default.existsSync(lcovFileName)) {
+        if (!(0, fs_1.existsSync)(lcovFileName)) {
             core.setFailed(`File ${lcovFileName} does not exist`);
             return;
         }
@@ -33371,7 +33380,7 @@ async function run() {
         core.setOutput('markdown-table', markdownTable);
         // Set step summary, if requested
         if (stepSummaryInput === 'true') {
-            const summary = _generateSummary(overallCoverage, markdownTable);
+            const summary = await _generateSummary(overallCoverage, markdownTable);
             core.summary.addRaw(summary).write();
         }
         // Set PR comment, if requested
@@ -33385,18 +33394,28 @@ async function run() {
             core.setFailed(error.message);
     }
 }
-function _generateSummary(overallCoverage, markdownTable) {
+async function _generateSummary(overallCoverage, markdownTable) {
     core.info('Generating coverage summary...');
-    return `# Coverage Summary
-
-Overall coverage: **${overallCoverage} %**
-
-<details><summary>Detailed coverage</summary>
-
-${markdownTable}
-
-</details>
-`;
+    // Template from configuration
+    let template = core.getInput('template-string');
+    if (!template || template.trim() === '') {
+        // Template from file
+        const templateFile = core.getInput('template-file');
+        if (templateFile || !(0, fs_1.existsSync)(templateFile)) {
+            throw new Error(`Template file not found: ${templateFile}`);
+        }
+        if (templateFile) {
+            template = await fs_1.promises.readFile(template, { encoding: 'utf-8' });
+        }
+    }
+    if (!template || template.trim() === '') {
+        // Fallback to default template
+        template = _defautTemplate;
+    }
+    const summary = template
+        .replaceAll(_OVERALL_COVERAGE_PLACEHOLDER, overallCoverage)
+        .replaceAll(_COVERAGE_TABLE_PLACEHOLDER, markdownTable);
+    return summary;
 }
 async function _handlePrComment(overallCoverage, markdownTable) {
     const prNumber = github.context.payload.pull_request?.number;
@@ -33416,7 +33435,7 @@ async function _handlePrComment(overallCoverage, markdownTable) {
             break;
         }
     }
-    const summary = `${_generateSummary(overallCoverage, markdownTable)}
+    const summary = `${await _generateSummary(overallCoverage, markdownTable)}
 ${commentTag}`;
     // If comment, found, replace the existing comment
     if (commentId > 0) {

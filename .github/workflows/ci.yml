@@ -58,8 +58,7 @@ jobs:
         id: test-action
         uses: ./
         with:
-          lcov-file: './__tests__/lcov-test-2.info'
-          excluded-files: '**/*.g.dart, **/*.freezed.dart, **/.realm.dart'
+          lcov-file: './coverage/lcov.info'
           step-summary: true
           pr-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }}

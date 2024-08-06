@@ -27,6 +27,12 @@ inputs:
   github-token:
     description: 'GitHub token to use for PR comment'
     required: false
+  tempplate-string:
+    description: 'Template string for the PR comment / step summary'
+    required: false
+  template-file:
+    description: 'Path to the template file for the PR comment / step summary'
+    required: false
 
 # Define your outputs here.
 outputs:

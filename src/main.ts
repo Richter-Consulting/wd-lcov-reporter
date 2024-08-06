@@ -1,9 +1,22 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import fs from 'fs'
+import { promises as fs, existsSync as exists } from 'fs'
 import { LcovParserConfigType } from './types'
 import { parseLcov } from './parse-lcov'
 import { calculateOverallCoverage, renderAsMardownTable } from './output-lcov'
+
+const _OVERALL_COVERAGE_PLACEHOLDER = '{{overall-coverage}}'
+const _COVERAGE_TABLE_PLACEHOLDER = '{{coverage-table}}'
+const _defautTemplate = `# Coverage Summary
+
+Overall coverage: **${_OVERALL_COVERAGE_PLACEHOLDER} %**
+
+<details><summary>Detailed coverage</summary>
+
+${_COVERAGE_TABLE_PLACEHOLDER}
+
+</details>
+`
 
 /**
  * The main function for the action.
@@ -22,7 +35,7 @@ export async function run(): Promise<void> {
       core.setFailed('File name is required')
       return
     }
-    if (!fs.existsSync(lcovFileName)) {
+    if (!exists(lcovFileName)) {
       core.setFailed(`File ${lcovFileName} does not exist`)
       return
     }
@@ -44,7 +57,7 @@ export async function run(): Promise<void> {
 
     // Set step summary, if requested
     if (stepSummaryInput === 'true') {
-      const summary = _generateSummary(overallCoverage, markdownTable)
+      const summary = await _generateSummary(overallCoverage, markdownTable)
       core.summary.addRaw(summary).write()
     }
 
@@ -57,22 +70,35 @@ export async function run(): Promise<void> {
     if (error instanceof Error) core.setFailed(error.message)
   }
 }
-function _generateSummary(
+async function _generateSummary(
   overallCoverage: string,
   markdownTable: string
-): string {
+): Promise<string> {
   core.info('Generating coverage summary...')
 
-  return `# Coverage Summary
+  // Template from configuration
+  let template = core.getInput('template-string')
+  if (!template || template.trim() === '') {
+    // Template from file
+    const templateFile = core.getInput('template-file')
+    if (templateFile || !exists(templateFile)) {
+      throw new Error(`Template file not found: ${templateFile}`)
+    }
 
-Overall coverage: **${overallCoverage} %**
+    if (templateFile) {
+      template = await fs.readFile(template, { encoding: 'utf-8' })
+    }
+  }
 
-<details><summary>Detailed coverage</summary>
+  if (!template || template.trim() === '') {
+    // Fallback to default template
+    template = _defautTemplate
+  }
 
-${markdownTable}
-
-</details>
-`
+  const summary = template
+    .replaceAll(_OVERALL_COVERAGE_PLACEHOLDER, overallCoverage)
+    .replaceAll(_COVERAGE_TABLE_PLACEHOLDER, markdownTable)
+  return summary
 }
 
 async function _handlePrComment(
@@ -104,7 +130,7 @@ async function _handlePrComment(
     }
   }
 
-  const summary = `${_generateSummary(overallCoverage, markdownTable)}
+  const summary = `${await _generateSummary(overallCoverage, markdownTable)}
 ${commentTag}`
   // If comment, found, replace the existing comment
   if (commentId > 0) {
