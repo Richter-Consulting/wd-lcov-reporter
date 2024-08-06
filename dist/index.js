@@ -33402,7 +33402,8 @@ async function _generateSummary(overallCoverage, markdownTable) {
         // Template from file
         const templateFile = core.getInput('template-file');
         if (templateFile || !(0, fs_1.existsSync)(templateFile)) {
-            throw new Error(`Template file not found: ${templateFile}`);
+            core.setFailed(`Template file not found: ${templateFile}`);
+            return '';
         }
         if (templateFile) {
             template = await fs_1.promises.readFile(template, { encoding: 'utf-8' });
