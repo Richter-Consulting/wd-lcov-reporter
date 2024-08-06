@@ -113,7 +113,7 @@ async function _handlePrComment(
   }
 
   core.info('Commenting on PR...')
-  const commentTag = `<!-- Richter-Constulting/wd-lcov-reporter-action for PR: ${prNumber} -->`
+  const commentTag = `<!-- Richter-Constulting/wd-lcov-reporter for PR: ${prNumber} -->`
 
   // Search for the comment with the given tag
   const octokit = github.getOctokit(core.getInput('github-token'))
