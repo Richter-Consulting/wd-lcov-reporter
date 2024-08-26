@@ -69,7 +69,7 @@
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0",
     "@types/micromatch": "^4.0.9",
-    "micromatch": "^4.0.7"
+    "micromatch": "^4.0.8"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
