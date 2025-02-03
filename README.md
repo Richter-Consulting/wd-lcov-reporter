@@ -1,9 +1,9 @@
 # LCOV reporter for GitHub Actions
 
-[![GitHub Super-Linter](https://github.com/Richter-Consulting/wd-lcov-reporter-action/actions/workflows/linter.yml/badge.svg)](https://github.com/super-linter/super-linter)
-![CI](https://github.com/Richter-Consulting/wd-lcov-reporter-action/actions/workflows/ci.yml/badge.svg)
-[![Check dist/](https://github.com/Richter-Consulting/wd-lcov-reporter-action/actions/workflows/check-dist.yml/badge.svg)](https://github.com/Richter-Consulting/wd-lcov-reporter-action/actions/workflows/check-dist.yml)
-[![CodeQL](https://github.com/Richter-Consulting/wd-lcov-reporter-action/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Richter-Consulting/wd-lcov-reporter-action/actions/workflows/codeql-analysis.yml)
+[![GitHub Super-Linter](https://github.com/Richter-Consulting/wd-lcov-reporter/actions/workflows/linter.yml/badge.svg)](https://github.com/super-linter/super-linter)
+![CI](https://github.com/Richter-Consulting/wd-lcov-reporter/actions/workflows/ci.yml/badge.svg)
+[![Check dist/](https://github.com/Richter-Consulting/wd-lcov-reporter/actions/workflows/check-dist.yml/badge.svg)](https://github.com/Richter-Consulting/wd-lcov-reporter/actions/workflows/check-dist.yml)
+[![CodeQL](https://github.com/Richter-Consulting/wd-lcov-reporter/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Richter-Consulting/wd-lcov-reporter/actions/workflows/codeql-analysis.yml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
 A simple action that parse the core data from LCOV file (line, function and
@@ -136,4 +136,4 @@ placeholders will be replaced with values calculated in the action:
   - Overall coverage
 - [x] Add possibility to "comment" on PR
 - [x] Add possibility for run output
-- [ ] Add templates
+- [x] Add templates
